@@ -19,5 +19,11 @@
   "bugs": {
     "url": "https://github.com/hilbug/10-team-html-generator/issues"
   },
-  "homepage": "https://github.com/hilbug/10-team-html-generator#readme"
+  "homepage": "https://github.com/hilbug/10-team-html-generator#readme",
+  "dependencies": {
+    "inquirer": "^7.3.3"
+  },
+  "devDependencies": {
+    "jest": "^26.4.2"
+  }
 }
