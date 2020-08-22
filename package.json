@@ -1,0 +1,23 @@
+{
+  "name": "10-team-html-generator",
+  "version": "1.0.0",
+  "description": "Software engineering team generator: a Node CLI that takes in information about employees and generates an HTML webpage that displays summaries for each person.",
+  "main": "app.js",
+  "directories": {
+    "lib": "lib",
+    "test": "test"
+  },
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hilbug/10-team-html-generator.git"
+  },
+  "author": "hilary ferraro",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/hilbug/10-team-html-generator/issues"
+  },
+  "homepage": "https://github.com/hilbug/10-team-html-generator#readme"
+}
