@@ -89,46 +89,20 @@ const init = async () => {
     console.log("Welcome to the Team HTML Page Generator! You will be guided through a series of questions to create profiles for your employees. If you don't have an answer right now, you can leave it blank. At the end, you will have a team.html file in the Output folder.");
     try {
         // Get user answers
-        //const answers = await promptUser();
         await promptUser();
-        //await promptUser();
-        //console.log('something here');
-        //console.log(employees);
-        //console.log(employees);
+        
+        // Write employees to HTML
         const employeeHTML = render(employees);
 
+        // Save HTML to teams.html
         await writeToFile(outputPath, employeeHTML);
 
-        //console.log("Successfully created /output/team.html");
+        // File successful
+        console.log("Successfully created /output/team.html");
     } catch (err) {
         console.log(err);
     }
 }
 
+// Initialize program
 init();
-
-
-
-// NOTES from assignment......
-// Write code to use inquirer to gather information about the development team members,
-// and to create objects for each team member (using the correct classes as blueprints!)
-
-// After the user has input all employees desired, call the `render` function (required
-// above) and pass in an array containing all employee objects; the `render` function will
-// generate and return a block of HTML including templated divs for each employee!
-
-// After you have your html, you're now ready to create an HTML file using the HTML
-// returned from the `render` function. Now write it to a file named `team.html` in the
-// `output` folder. You can use the variable `outputPath` above target this location.
-// Hint: you may need to check if the `output` folder exists and create it if it
-// does not.
-
-// HINT: each employee type (manager, engineer, or intern) has slightly different
-// information; write your code to ask different questions via inquirer depending on
-// employee type.
-
-// HINT: make sure to build out your classes first! Remember that your Manager, Engineer,
-// and Intern classes should all extend from a class named Employee; see the directions
-// for further information. Be sure to test out each class and verify it generates an
-// object with the correct structure and methods. This structure will be crucial in order
-// for the provided `render` function to work! ```
