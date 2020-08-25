@@ -18,35 +18,13 @@ const render = require("./lib/htmlRenderer");
 
 // initialize empty array to store employees
 let employees = [];
-/*
-// Prompst user with questions about employees
-let promptUser = () => {
-    let employee = {};
-    return inquirer.prompt('roleQuestions').then((answer) => {
-        employee['empRole'] = answer.empRole;
-        inquirer.prompt(employeeQuestions).then((answer) => {
-            employee['empName'] = answer.empName;
-            employee['empID'] = answer.empID;
-            employee['empEmail'] = answer.empEmail;
-            if (employee['empRole'] === 'Manager') {
-                inquirer.prompt(managerQuestions).then((answer) => {
-                    employee['mgrOfficeNumber'] = answer.mgrOfficeNumber;
-                    startQuestions();
-                });
-            }
-            else if (employee['empRole'] === 'Done') {
-                console.log('Done with team members!');
-                console.log(employee);
-            }
-        });
-    });
-}*/
 
 let promptUser = () => {
     // name, id, email, custom
     let employee = {};
     // first ask for a role
     return inquirer.prompt(roleQuestions).then((answer) => {
+    //return firstQuestion().then((answer) => {
         // save role to employee object
         employee['empRole'] = answer.empRole;
         //console.log(answer.empRole);
@@ -71,7 +49,8 @@ let promptUser = () => {
                         // add Manager construct to employees array
                         employees.push(addEmployee);
                         // prompt first question again
-                        promptUser();
+                        return promptUser();
+                        //firstQuestion();
                     });
                     // if the role was engineer, ask engineer specific question
                 } else if (employee['empRole'] === 'Engineer') {
@@ -83,7 +62,7 @@ let promptUser = () => {
                         // add Engineer construct to employees array
                         employees.push(addEmployee);
                         // prompt first question again
-                        promptUser();
+                        return promptUser();
                     });
                     // if the role was intern, ask intern specific question
                 } else if (employee['empRole'] === 'Intern') {
@@ -95,7 +74,7 @@ let promptUser = () => {
                         // add Intern construct to employees array
                         employees.push(addEmployee);
                         // prompt first question again
-                        promptUser();
+                        return promptUser();
                     });
                 }
             });
