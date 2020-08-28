@@ -3,6 +3,7 @@ const Manager = require("./lib/Manager");
 const Engineer = require("./lib/Engineer");
 const Intern = require("./lib/Intern");
 const { roleQuestions, employeeQuestions, managerQuestions, engineerQuestions, internQuestions } = require("./lib/teamQuestions");
+const mappedNames = require('./lib/mappedNames');
 const render = require("./lib/htmlRenderer");
 
 // npm packages
@@ -25,15 +26,17 @@ let promptUser = () => {
     return inquirer.prompt(roleQuestions).then((answer) => {
         // save role to employee object
         employee['empRole'] = answer.empRole;
-        //console.log(answer.empRole);
+        // if they are done creating the team, return employees array
         if (answer.empRole === 'Done') {
             console.log(`Your team is complete.`);
             console.log(employees);
             return employees;
+        // otherwise, continue on with the other questions
         } else {
             // then ask general employee questions
             return inquirer.prompt(employeeQuestions).then((answer) => {
-                // save general answers to employee object
+                // save general answers to objects for employee and name validation
+                mappedNames.mappedNames.push(answer.empName);
                 employee['empName'] = answer.empName;
                 employee['empId'] = answer.empId;
                 employee['empEmail'] = answer.empEmail;
@@ -61,7 +64,7 @@ let promptUser = () => {
                         // prompt first question again
                         return promptUser();
                     });
-                    // if the role was intern, ask intern specific question
+                // if the role was intern, ask intern specific question
                 } else if (employee['empRole'] === 'Intern') {
                     return inquirer.prompt(internQuestions).then((answer) => {
                         // save intern answer to employee object
@@ -70,7 +73,7 @@ let promptUser = () => {
                         const addEmployee = new Intern(employee['empName'], employee['empId'], employee['empEmail'], employee['internSchool']);
                         // add Intern construct to employees array
                         employees.push(addEmployee);
-                        // prompt first question again
+                        // prompt first question again until "Done"
                         return promptUser();
                     });
                 }
@@ -82,12 +85,13 @@ let promptUser = () => {
 // function to write team.html file
 const writeToFile = util.promisify(fs.writeFile);
 
+// function to initiate program
 const init = async () => {
-    console.log("Welcome to the Team HTML Page Generator! You will be guided through a series of questions to create profiles for your employees. If you don't have an answer right now, you can leave it blank. At the end, you will have a team.html file in the Output folder.");
+    console.log("Welcome to the Team HTML Page Generator! You will be guided through a series of questions to create profiles for your employees. If you don't have an answer right now, you can leave it blank by hitting enter. At the end, you will have a team.html file in the Output folder.");
     try {
         // Get user answers
         await promptUser();
-        
+
         // Write employees to HTML
         const employeeHTML = render(employees);
 
