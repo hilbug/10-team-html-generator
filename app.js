@@ -10,6 +10,7 @@ const render = require("./lib/htmlRenderer");
 const inquirer = require("inquirer");
 const path = require("path");
 const fs = require("fs");
+const fsPromises = require("fs");
 const util = require("util");
 
 // output paths
@@ -85,10 +86,20 @@ let promptUser = () => {
 // function to write team.html file
 const writeToFile = util.promisify(fs.writeFile);
 
+// check if output folder exists and create one if it doesn't
+const checkDir = () => {
+    if (!fs.existsSync(OUTPUT_DIR)) {
+        fsPromises.mkdir(OUTPUT_DIR, (err) => {if (err) throw err});
+    }
+}
+
 // function to initiate program
 const init = async () => {
     console.log("Welcome to the Team HTML Page Generator! You will be guided through a series of questions to create profiles for your employees. If you don't have an answer right now, you can leave it blank by hitting enter. At the end, you will have a team.html file in the Output folder.");
     try {
+        // make directory if it doesn't exist
+        checkDir();
+
         // Get user answers
         await promptUser();
 
