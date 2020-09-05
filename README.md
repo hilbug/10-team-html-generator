@@ -44,5 +44,5 @@ so that I have quick access to emails and GitHub profiles
 - [Inquirer](https://www.npmjs.com/package/inquirer)
 - [Jest](https://www.npmjs.com/package/jest)
 - [License Badges](https://gist.github.com/artem-solovev/e1602722f84835f35daef4dfb3df5500)
-- [FontAwesome icons] (https://fontawesome.com/)
+- [FontAwesome icons](https://fontawesome.com/)
 - Thank you to @tiffany-brand and Kemp for assisting with exporting values for duplicate validation.
